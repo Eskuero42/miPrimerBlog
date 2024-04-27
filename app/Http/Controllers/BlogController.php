@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comentario;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -9,12 +10,21 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      */
+    private $datos = null;
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         // return "Soy el método index"; //GET
-        return view("estateagency.pages.about");
+        $losblogs= Comentario::orderBy('created_at','asc')->get();
+        //$losblogs=Blog::all()->orderBy('created_at')->get(); //select*from blog
+        //var_dump($losblogs[3]->contenido);
+        //dd($losblogs[0]);
+        return view("blog",with(['losblogs'=> $losblogs]));
         //localhost:8000/blog
     }
+    
 
     /**
      * Show the form for creating a new resource.

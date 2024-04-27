@@ -4,11 +4,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CursoController;
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/', function () {
-    return view('blog');
-});
-
+Route::resource('blog', BlogController::class);
+Route::get("/",[BlogController::class,"index"]);
 Route::get("blog", [BlogController::class, "index"]);
 //Route::resource('blog', BlogController::class);
 
